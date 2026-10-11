@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutri Clinic - Assistente</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Biblioteca para gerar PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🍏 Nutri Clinic - Anamnese</h1>
+        
+        <div class="card" id="form-anamnese">
+            <h2>Dados do Paciente</h2>
+            <div class="form-group">
+                <input type="text" id="nome" placeholder="Nome Completo">
+                <div class="linha">
+                    <input type="number" id="idade" placeholder="Idade">
+                    <input type="number" id="peso" placeholder="Peso (kg)">
+                    <input type="number" id="altura" placeholder="Altura (cm)">
+                </div>
+                
+                <select id="objetivo">
+                    <option value="" disabled selected>Objetivo Principal</option>
+                    <option value="emagrecimento">Emagrecimento (Défice Calórico)</option>
+                    <option value="hipertrofia">Hipertrofia (Superavit)</option>
+                    <option value="manutencao">Manutenção / Reeducação</option>
+                </select>
+
+                <select id="restricao">
+                    <option value="nenhuma" selected>Sem Restrições</option>
+                    <option value="vegetariano">Vegetariano / Vegano</option>
+                    <option value="intolerante">Intolerância à Lactose / Glúten</option>
+                </select>
+
+                <button onclick="gerarPlano()">Gerar Estratégia Base</button>
+            </div>
+        </div>
+
+        <!-- Esta secção fica escondida até gerar o plano -->
+        <div id="area-relatorio" style="display: none;">
+            <div class="card" id="documento-pdf">
+                <div class="cabecalho-pdf">
+                    <h2>Plano Nutricional e Orientações</h2>
+                    <p>Paciente: <span id="out-nome"></span> | Idade: <span id="out-idade"></span> | IMC: <span id="out-imc"></span></p>
+                </div>
+                
+                <div class="seccao-pdf">
+                    <h3>🎯 Estratégia e Aceleradores</h3>
+                    <p id="out-estrategia"></p>
+                </div>
+
+                <div class="seccao-pdf">
+                    <h3>📝 Orientações Gerais</h3>
+                    <ul id="out-orientacoes"></ul>
+                </div>
+                
+                <div class="seccao-pdf">
+                    <h3>🍽️ Esboço da Dieta (Editável)</h3>
+                    <textarea id="texto-dieta" rows="8" placeholder="Escreva a dieta detalhada aqui..."></textarea>
+                </div>
+            </div>
+            
+            <button class="btn-pdf" onclick="descarregarPDF()">Descarregar PDF 📄</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
